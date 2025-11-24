@@ -1,0 +1,22 @@
+#pragma once
+
+namespace spatial
+{
+	template<typename T>
+	class ISizeable
+	{
+	public:
+		virtual const T GetWidth() const = 0;
+		virtual const T GetHeight() const = 0;
+		virtual const spatial::Size<T> GetSize() const = 0;
+	};
+
+	template<typename T>
+	class IResizeable : public ISizeable<T>
+	{
+	public:
+		virtual void SetSize(const spatial::Size<int>& size) = 0;
+		virtual void SetHeight(const int height) = 0;
+		virtual void SetWidth(const int width) = 0;
+	};
+}

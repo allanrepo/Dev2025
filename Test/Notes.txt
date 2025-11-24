@@ -1,0 +1,171 @@
+﻿Check list:
+Win32 wrapper												[done]
+Event														[done]
+DX11 core wrapper											[done]
+Sprite Renderer												[done]
+Sprite Renderer (DX11 impl)									[done]
+Texture														[done]
+Texture (DX11 impl)											[done]
+bitmap loader(bmp file only)								[done]
+Font Atlas (texture)										[done]
+Drawable Surface (texture)									[done]
+Stopwatch (measure loop delta)								[done]
+IntervalTimer (control frame rate)							[done]
+Input system (win32 listener, keyboard and mouse support)	[done]
+Animator, Animation, Frame									[done]
+Sprite Sheet (texture)
+Sprite (renderable)
+PNG file loader (WIC)										[done]
+
+
+Event:
+Limitation: Delegate does not support const class methods. Delegate cannot be specialized to handle it...
+Limitation: not exactly thread safe, specially when adding or removing listeners or invoking the event itself
+Design consideration: 
+it does not expose the delegate object stored in its collection. 
+it only requires function to invoke or the class method and the calling object to add or remove listener
+
+
+D3D11 Renderer:
+for 2D rendering, depth stencil is not required so we're not adding this
+
+uint32_t:
+For graphics APIs and memory buffers, uint32_t is ideal because Direct3D, Vulkan, etc. often require exact data layouts.
+
+
+	graphics::dx11
+		::DX11Core
+
+	graphics::dx11::renderer
+		::DX11CanvasImpl
+		::DX11RendererBase
+		::DX11RendererImmediateImpl
+		::DX11RendererBatchImpl
+
+	graphics::renderer
+		::ICanvas
+		::Renderer
+		::ICanvasImpl
+		::IRenderer
+		::Renderer
+		::IRendererImpl
+
+    graphics::factory
+        ::RendererFactory
+
+	graphics::resource
+
+	graphics::dx11::resource
+
+
+
+Game Object
+- renderable
+- it animates
+- has state - walking, standing, running
+- state - walking
+	- define animation sequence and duration
+	- specify sprite sheetwhy 
+
+- on render 
+	- 
+
+i think i need a place to store my assets and resource. is there a system you can suggest? 
+I have the following classes:
+
+animator
+- this is the animation engine. it takes delta time and use it to advance currently loaded animation object
+- it composes a current index. this index is an integer that ranges from 0 to animation.size - 1.
+- the animator increments the index value based on delta time and animation sequence's per frame duration
+- fires an event when index value is incremented
+- if loop is enabled, index value loops back to 0 when it reaches animation's last frame
+
+animation
+- a collection of frame indices and corresponding duration. a collection of pair or tuple
+- frame indices are just numbers. it does not know what they are and who they are for.
+- animator uses animation to advance current frame value based on the index in animation's sequence
+- this sequence could be animation sequence of running character but does not know the images to draw as it does not know or care about the image source
+
+sprite
+- it is renderable. meaning it can bind the texture object of a sprite atlas and can provide the source rectangle that is the portion of the sprite atlas to render
+- however, i think it should not have reference to the sprite atlas itself. but instead contains an id (handle) which is used to lookup the storage of resource and assets
+- has reference to sprite atlas but it cannot decide which sprite atlas to use
+- it has reference to current animation frame index but it does not know which sprite atlas it belongs to. it just know its a number
+
+I have questions:
+1. an object has multiple animation, each for is state e.g. walking, idle, running, attack, etc... should the game object compose a list of animation objects?
+2. since there are many animation sequences, it is also possible that there are more than one spritesheet to contain all frames of various animations. how do i seamlessly switch between frames?
+1. based on description, animation contains only sequence of frame indices. should it also include reference to spritesheet? will it help in seamless switching of spritesheet?
+
+
+for you item 1, Animator looks like it is tied with the specific animationstate. what is i want to use this for a spaceship where it flies, shoot laser, throw bombs?
+
+for item 2, why do animation don't need to know corresponding sprite atlas? say atlas 1 has frame indices 0-5 then atlast 2 has frame indices 0-10. so frame indices 0-5 is ambiguous.
+how can sprite know which atlas to use?
+
+
+1. state reuse
+- this is a good point. i do remember the reason why i wanted to store states is because they contain animation
+- and animations are predetermined so you can build them immediately and store in the state objects
+- i avoid have a cache of animations because i am avoiding lookup/find in map. 
+- so if i make states build on the fly, i would have to do it on animation objects too if i want to avoid what i was avoiding before
+- because of that, now i have a limit. i cannot just make a very complex animation with hundreds of frames as they are going to be built on hot stages.
+
+so these are what i want (and don't want)
+- build animations during load stage and store in states so they can be used without performance penalty during hot stages
+- because of above, i need a storage of states in my state machine. a map of base states is not enough as this will for me to cast to specific inherited class of state
+- need to design storage such that it can store various types of states and i can access them knowing what their types are
+
+idea for storage 
+- something like i can register a state store.register<T>(state)
+- then access like T* store.GetState<T>();
+- like my context cache class. but i think the immediate weakness of this is i can only store one item per class type
+
+
+
+idle_right, CharacterTestAnimIdleRight.csv
+walk_right, CharacterTestAnimWalkRight.csv
+attack_right, CharacterTestAnimAttackRight.csv
+idle_left, CharacterTestAnimIdleLeft.csv
+walk_left, CharacterTestAnimWalkLeft.csv
+attack_left, CharacterTestAnimAttackLeft.csv
+
+
+ok i want to work on attacking another actor next. my guess is now i need to implement collision detection. i need to be able to select a target actor, like it has a bounding box where mouse position can hover and be able to select it as target. there are several possible attack sequence i can think of. 1.) "attack to" like when i click on another actor then my character walks into its vicinity then attack it once it reach it. 
+
+
+ok next i want to do is instance an actor that behaves like an npc or a mob. later i can implement behavior where it is attackable, but that would be later. for now, i want it to be roaming around while idle.
+so behavior i can describe as follows:
+1. in idle state
+2. at random time, it will walk to another location, within a specified radius, as if it is patrolling
+3. then be idle again once reached the new target
+4. while idle, it randomly switches (at random interval of time) its face direction, as if it is looking around while patrolling
+5. rinse and repeat.
+
+
+
+
+
+001
+000
+100
+
+001
+100
+
+
+00000
+10000
+00000
+00000
+00010
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,519 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Win32">
+      <UniqueIdentifier>{c137c626-93a2-4306-b554-b26b35b7e6c2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Win32\Header Files">
+      <UniqueIdentifier>{af26049b-9475-4453-846c-bb63b6da5f76}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Win32\Source Files">
+      <UniqueIdentifier>{ef494d15-f625-4596-bbfa-daf93c8dd9c7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Commons">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Main">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Graphics">
+      <UniqueIdentifier>{02fe1f65-0793-43ad-a2dc-ac2127c8c187}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Graphics\Renderer">
+      <UniqueIdentifier>{c469964b-dab7-4758-9b1e-c5910a2ef922}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Graphics\Renderer\Header Files">
+      <UniqueIdentifier>{6804bec9-4e22-4d90-abe0-3895924eaefe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Graphics\Renderer\Source Files">
+      <UniqueIdentifier>{ea3ac448-cbdb-4af4-936d-a4f6715f4705}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Graphics\Factory">
+      <UniqueIdentifier>{38be3aca-17e3-4f72-b3b9-c686a79c2cec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tests">
+      <UniqueIdentifier>{b16f68b3-360c-489e-91a4-febdd4395500}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Graphics\Animation">
+      <UniqueIdentifier>{97daf08b-28ca-4d7d-ac43-8114a1b395da}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Timers">
+      <UniqueIdentifier>{b91f2c02-53fe-4953-bfc3-6a99ae738a9e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Utilities">
+      <UniqueIdentifier>{0e7ab59e-7c3c-4316-a09d-f1f74b03d082}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Graphics\Renderable">
+      <UniqueIdentifier>{e7135b5b-97db-4356-b068-17fc45805cd4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Graphics\Renderable\FontAtlas">
+      <UniqueIdentifier>{6eb52b9a-49f7-45d8-a6ab-8b4d98ffd889}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Graphics\Renderable\DrawableSurface">
+      <UniqueIdentifier>{c553f59a-5352-4ec6-9351-46867fc98240}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Graphics\Renderable\ImageSurface">
+      <UniqueIdentifier>{57252c80-90ec-4e59-90d2-00a9a04e523d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Graphics\Renderable\Texture">
+      <UniqueIdentifier>{9a12288c-56df-41cf-8ff0-570b6e0b1b64}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Graphics\Renderable\Renderable">
+      <UniqueIdentifier>{93448dfd-5aab-4fcb-9feb-cc942f0ffe9d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Graphics\Renderable\Sprite">
+      <UniqueIdentifier>{b703ab48-7f0d-40cf-acf0-ed4b260a8586}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Cache">
+      <UniqueIdentifier>{8e87164c-569f-453d-910b-96fa4b519f23}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Graphics\Renderable\SpriteAtlas">
+      <UniqueIdentifier>{49bee01f-67e6-43fd-b465-f9ec9c421384}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components">
+      <UniqueIdentifier>{5cd18b4d-e8ee-4272-a355-03b4b802b405}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="States">
+      <UniqueIdentifier>{428ac9c1-6d5e-4199-8e57-178343158a31}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\Factories">
+      <UniqueIdentifier>{30971bc2-8ee7-4336-8ea2-78dafbd5fe58}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Spatial">
+      <UniqueIdentifier>{30c37578-8f9d-4805-ab09-3537a19c7e8d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tile">
+      <UniqueIdentifier>{a83f9cdc-b340-40a0-bc4a-8dd80e44ce5b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Assets">
+      <UniqueIdentifier>{d9e9a56c-0d9b-4db5-acae-fd4be96a9d4a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\Actor">
+      <UniqueIdentifier>{b635afbb-c889-419c-b7d6-2799055fcfdd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Graphics\IO">
+      <UniqueIdentifier>{8381b1ff-3c00-4131-b3c4-f020da09a127}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Math">
+      <UniqueIdentifier>{ddd371c6-db96-4f2b-96f1-41abb5936b9a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Navigation">
+      <UniqueIdentifier>{8c4f48a7-e380-4515-9bc7-b5f352ad9654}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp">
+      <Filter>Main</Filter>
+    </ClCompile>
+    <ClCompile Include="Window.cpp">
+      <Filter>Win32\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="WindowBase.cpp">
+      <Filter>Win32\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GDIUtility.cpp">
+      <Filter>Win32\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DX11Core.cpp">
+      <Filter>Graphics\Renderer\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DX11CanvasImpl.cpp">
+      <Filter>Graphics\Renderer\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SpriteRenderer.cpp">
+      <Filter>Graphics\Renderer\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DX11RendererBase.cpp">
+      <Filter>Graphics\Renderer\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DX11RendererImmediateImpl.cpp">
+      <Filter>Graphics\Renderer\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DX11RendererBatchImpl.cpp">
+      <Filter>Graphics\Renderer\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Canvas.cpp">
+      <Filter>Graphics\Renderer\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="StopWatch.cpp">
+      <Filter>Timers</Filter>
+    </ClCompile>
+    <ClCompile Include="IntervalTimer.cpp">
+      <Filter>Timers</Filter>
+    </ClCompile>
+    <ClCompile Include="DrawableSurface.cpp">
+      <Filter>Graphics\Renderable\DrawableSurface</Filter>
+    </ClCompile>
+    <ClCompile Include="ImageSurface.cpp">
+      <Filter>Graphics\Renderable\ImageSurface</Filter>
+    </ClCompile>
+    <ClCompile Include="FontAtlas.cpp">
+      <Filter>Graphics\Renderable\FontAtlas</Filter>
+    </ClCompile>
+    <ClCompile Include="DX11TextureImpl.cpp">
+      <Filter>Graphics\Renderable\Texture</Filter>
+    </ClCompile>
+    <ClCompile Include="TextureFactory.cpp">
+      <Filter>Graphics\Factory</Filter>
+    </ClCompile>
+    <ClCompile Include="PNGLoader.cpp">
+      <Filter>Utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="BitmapLoader.cpp">
+      <Filter>Utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="Sprite.cpp">
+      <Filter>Graphics\Renderable\Sprite</Filter>
+    </ClCompile>
+    <ClCompile Include="SpriteAtlas.cpp">
+      <Filter>Graphics\Renderable\SpriteAtlas</Filter>
+    </ClCompile>
+    <ClCompile Include="SpriteAtlasFactory.cpp">
+      <Filter>Graphics\Factory</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine.cpp">
+      <Filter>Main</Filter>
+    </ClCompile>
+    <ClCompile Include="Actor.cpp">
+      <Filter>Components\Actor</Filter>
+    </ClCompile>
+    <ClCompile Include="DX11ImageFileHelper.cpp">
+      <Filter>Graphics\IO</Filter>
+    </ClCompile>
+    <ClCompile Include="Draw.cpp">
+      <Filter>Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Tile.cpp">
+      <Filter>Tile</Filter>
+    </ClCompile>
+    <ClCompile Include="PathFinder.cpp">
+      <Filter>Navigation</Filter>
+    </ClCompile>
+    <ClCompile Include="FootprintResolver.cpp">
+      <Filter>Navigation</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Window.h">
+      <Filter>Win32\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="WindowBase.h">
+      <Filter>Win32\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="IWindow.h">
+      <Filter>Win32\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GDIUtility.h">
+      <Filter>Win32\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DX11Core.h">
+      <Filter>Graphics\Renderer\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DX11CanvasImpl.h">
+      <Filter>Graphics\Renderer\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ICanvas.h">
+      <Filter>Graphics\Renderer\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Canvas.h">
+      <Filter>Graphics\Renderer\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ICanvasImpl.h">
+      <Filter>Graphics\Renderer\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="IRenderer.h">
+      <Filter>Graphics\Renderer\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer.h">
+      <Filter>Graphics\Renderer\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="IRendererImpl.h">
+      <Filter>Graphics\Renderer\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DX11RendererBase.h">
+      <Filter>Graphics\Renderer\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DX11RendererImmediateImpl.h">
+      <Filter>Graphics\Renderer\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DX11RendererBatchImpl.h">
+      <Filter>Graphics\Renderer\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="RendererFactory.h">
+      <Filter>Graphics\Factory</Filter>
+    </ClInclude>
+    <ClInclude Include="CanvasFactory.h">
+      <Filter>Graphics\Factory</Filter>
+    </ClInclude>
+    <ClInclude Include="TextureFactory.h">
+      <Filter>Graphics\Factory</Filter>
+    </ClInclude>
+    <ClInclude Include="TestRendererVisualComparison.h">
+      <Filter>Tests</Filter>
+    </ClInclude>
+    <ClInclude Include="TestBed.h">
+      <Filter>Tests</Filter>
+    </ClInclude>
+    <ClInclude Include="StressTestRendererWithEngine.h">
+      <Filter>Tests</Filter>
+    </ClInclude>
+    <ClInclude Include="TestInput.h">
+      <Filter>Tests</Filter>
+    </ClInclude>
+    <ClInclude Include="StopWatch.h">
+      <Filter>Timers</Filter>
+    </ClInclude>
+    <ClInclude Include="IntervalTimer.h">
+      <Filter>Timers</Filter>
+    </ClInclude>
+    <ClInclude Include="Timer.h">
+      <Filter>Timers</Filter>
+    </ClInclude>
+    <ClInclude Include="TestTimer.h">
+      <Filter>Tests</Filter>
+    </ClInclude>
+    <ClInclude Include="DrawableSurface.h">
+      <Filter>Graphics\Renderable\DrawableSurface</Filter>
+    </ClInclude>
+    <ClInclude Include="FontAtlas.h">
+      <Filter>Graphics\Renderable\FontAtlas</Filter>
+    </ClInclude>
+    <ClInclude Include="IFontAtlas.h">
+      <Filter>Graphics\Renderable\FontAtlas</Filter>
+    </ClInclude>
+    <ClInclude Include="IDrawableSurface.h">
+      <Filter>Graphics\Renderable\DrawableSurface</Filter>
+    </ClInclude>
+    <ClInclude Include="ImageSurface.h">
+      <Filter>Graphics\Renderable\ImageSurface</Filter>
+    </ClInclude>
+    <ClInclude Include="IImageSurface.h">
+      <Filter>Graphics\Renderable\ImageSurface</Filter>
+    </ClInclude>
+    <ClInclude Include="DX11TextureImpl.h">
+      <Filter>Graphics\Renderable\Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="ITexture.h">
+      <Filter>Graphics\Renderable\Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="TextureImpl.h">
+      <Filter>Graphics\Renderable\Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="IRenderable.h">
+      <Filter>Graphics\Renderable\Renderable</Filter>
+    </ClInclude>
+    <ClInclude Include="TestSprite.h">
+      <Filter>Tests</Filter>
+    </ClInclude>
+    <ClInclude Include="StressTestRenderer.h">
+      <Filter>Tests</Filter>
+    </ClInclude>
+    <ClInclude Include="BitmapLoader.h">
+      <Filter>Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="PNGLoader.h">
+      <Filter>Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="CSVFile.h">
+      <Filter>Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="Utilities.h">
+      <Filter>Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="SpriteFactory.h">
+      <Filter>Graphics\Factory</Filter>
+    </ClInclude>
+    <ClInclude Include="ISprite.h">
+      <Filter>Graphics\Renderable\Sprite</Filter>
+    </ClInclude>
+    <ClInclude Include="Sprite.h">
+      <Filter>Graphics\Renderable\Sprite</Filter>
+    </ClInclude>
+    <ClInclude Include="Repository.h">
+      <Filter>Cache</Filter>
+    </ClInclude>
+    <ClInclude Include="Dictionary.h">
+      <Filter>Cache</Filter>
+    </ClInclude>
+    <ClInclude Include="ContextCache.h">
+      <Filter>Cache</Filter>
+    </ClInclude>
+    <ClInclude Include="SpriteAtlas.h">
+      <Filter>Graphics\Renderable\SpriteAtlas</Filter>
+    </ClInclude>
+    <ClInclude Include="ISpriteAtlas.h">
+      <Filter>Graphics\Renderable\SpriteAtlas</Filter>
+    </ClInclude>
+    <ClInclude Include="SpriteAtlasFactory.h">
+      <Filter>Graphics\Factory</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine.h">
+      <Filter>Main</Filter>
+    </ClInclude>
+    <ClInclude Include="Animation.h">
+      <Filter>Graphics\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="AnimationFactory.h">
+      <Filter>Graphics\Factory</Filter>
+    </ClInclude>
+    <ClInclude Include="State.h">
+      <Filter>States</Filter>
+    </ClInclude>
+    <ClInclude Include="StateMachine.h">
+      <Filter>States</Filter>
+    </ClInclude>
+    <ClInclude Include="ActorFactory.h">
+      <Filter>Components\Factories</Filter>
+    </ClInclude>
+    <ClInclude Include="ISizeable.h">
+      <Filter>Spatial</Filter>
+    </ClInclude>
+    <ClInclude Include="Motion.h">
+      <Filter>Spatial</Filter>
+    </ClInclude>
+    <ClInclude Include="Transform.h">
+      <Filter>Spatial</Filter>
+    </ClInclude>
+    <ClInclude Include="Event.h">
+      <Filter>Commons</Filter>
+    </ClInclude>
+    <ClInclude Include="Factory.h">
+      <Filter>Commons</Filter>
+    </ClInclude>
+    <ClInclude Include="Input.h">
+      <Filter>Commons</Filter>
+    </ClInclude>
+    <ClInclude Include="Logger.h">
+      <Filter>Commons</Filter>
+    </ClInclude>
+    <ClInclude Include="Singleton.h">
+      <Filter>Commons</Filter>
+    </ClInclude>
+    <ClInclude Include="Actor.h">
+      <Filter>Components\Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="IActor.h">
+      <Filter>Components\Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="Tile.h">
+      <Filter>Tile</Filter>
+    </ClInclude>
+    <ClInclude Include="TestActorStateBehavior.h">
+      <Filter>Tests</Filter>
+    </ClInclude>
+    <ClInclude Include="DX11ImageFileHelper.h">
+      <Filter>Graphics\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="ActorState.h">
+      <Filter>Tests</Filter>
+    </ClInclude>
+    <ClInclude Include="TestTile.h">
+      <Filter>Tests</Filter>
+    </ClInclude>
+    <ClInclude Include="TestSaveTextureToFile.h">
+      <Filter>Tests</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera.h">
+      <Filter>Spatial</Filter>
+    </ClInclude>
+    <ClInclude Include="Draw.h">
+      <Filter>Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Size.h">
+      <Filter>Spatial</Filter>
+    </ClInclude>
+    <ClInclude Include="Pos.h">
+      <Filter>Spatial</Filter>
+    </ClInclude>
+    <ClInclude Include="Color.h">
+      <Filter>Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Units.h">
+      <Filter>Commons</Filter>
+    </ClInclude>
+    <ClInclude Include="Text.h">
+      <Filter>Commons</Filter>
+    </ClInclude>
+    <ClInclude Include="Math.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Rect.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Vector.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="PathFinder.h">
+      <Filter>Navigation</Filter>
+    </ClInclude>
+    <ClInclude Include="TestPathFinder.h">
+      <Filter>Tests</Filter>
+    </ClInclude>
+    <ClInclude Include="FootprintResolver.h">
+      <Filter>Navigation</Filter>
+    </ClInclude>
+    <ClInclude Include="TestFootprintResolver.h">
+      <Filter>Tests</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Notes.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ActorTestAnimAttackRight.csv">
+      <Filter>Assets</Filter>
+    </None>
+    <None Include="ActorTestAnimWalkRight.csv">
+      <Filter>Assets</Filter>
+    </None>
+    <None Include="CharacterTest_2304x1536_12x8.csv">
+      <Filter>Assets</Filter>
+    </None>
+    <None Include="CharacterTestAnimAttackRight.csv">
+      <Filter>Assets</Filter>
+    </None>
+    <None Include="ActorTestState.csv">
+      <Filter>Assets</Filter>
+    </None>
+    <None Include="CharacterTestAnimAttackLeft.csv">
+      <Filter>Assets</Filter>
+    </None>
+    <None Include="ActorTestAnimIdleRight.csv">
+      <Filter>Assets</Filter>
+    </None>
+    <None Include="CharacterTestAnimWalkLeft.csv">
+      <Filter>Assets</Filter>
+    </None>
+    <None Include="CharacterTestAnimIdleRight.csv">
+      <Filter>Assets</Filter>
+    </None>
+    <None Include="debug_character_spriteatlas_6x8.csv">
+      <Filter>Assets</Filter>
+    </None>
+    <None Include="CharacterTestAnimWalkRight.csv">
+      <Filter>Assets</Filter>
+    </None>
+    <None Include="CharacterTestAnimIdleLeft.csv">
+      <Filter>Assets</Filter>
+    </None>
+    <None Include="CharacterTestStates.csv">
+      <Filter>Assets</Filter>
+    </None>
+    <None Include="StressTestImage.csv">
+      <Filter>Assets</Filter>
+    </None>
+    <None Include="tilemap.csv">
+      <Filter>Assets</Filter>
+    </None>
+    <None Include="PathfindingTileMap.csv">
+      <Filter>Assets</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="CharacterTest_2304x1536_12x8.png">
+      <Filter>Assets</Filter>
+    </Image>
+  </ItemGroup>
+</Project>
