@@ -96,17 +96,17 @@ namespace engine
 
 	namespace io
 	{
-		template<typename T, typename U>
+		template<typename U>
 		class TileLayerLoader {
 		public:
-			static component::tile::TileLayer<T> LoadFromCSV(
+			static component::tile::TileLayer LoadFromCSV(
 				const std::string& filename,
 				char delimiter = ',',
-				std::function<T(int, int, const U&)> tileLoader =
-				[](int row, int col, const U& cell) -> T
+				std::function<component::tile::TileInstance(int, int, const U&)> tileLoader =
+				[](int row, int col, const U& cell) -> component::tile::TileInstance
 				{
 					// assumes T has a constructor like T{int}
-					return T{ cell };
+					return component::tile::TileInstance{ cell, 0 };
 				}
 			)
 			{
@@ -119,7 +119,7 @@ namespace engine
 				int height = static_cast<int>(csvFile.GetRowCount());
 				int width = static_cast<int>(csvFile.GetColCount(0)); // assume uniform width
 
-				component::tile::TileLayer<T> layer;
+				component::tile::TileLayer layer;
 				layer.SetSize({ width, height });
 
 				for (int row = 0; row < height; ++row)
@@ -134,9 +134,9 @@ namespace engine
 
 						U cell = csvFile.GetValue<U>(row, col);
 
-						T tile = tileLoader(row, col, cell);
+						component::tile::TileInstance tile = tileLoader(row, col, cell);
 
-						layer.SetTile(row, col, tile);
+						layer.SetTileInstance(row, col, tile);
 					}
 				}
 

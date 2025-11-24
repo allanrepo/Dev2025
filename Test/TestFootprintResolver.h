@@ -31,7 +31,8 @@ namespace test
 			int index;
 		};
 		engine::Engine m_engine;
-		component::tile::TileLayer<Tile> m_tilemap;
+		component::tile::TileLayer m_tilemap;
+		component::tile::Tileset m_tileset;
 		spatial::Camera m_camera;
 		std::shared_ptr<graphics::resource::IFontAtlas> m_fontSmall;
 		std::shared_ptr<graphics::resource::IFontAtlas> m_fontLarge;
@@ -88,17 +89,7 @@ namespace test
 
 		void OnKeyDown(int key)
 		{
-
-			if (key == 32) // space key
-			{
-			}
 			if (key == 49) // 1
-			{
-			}
-			if (key == 50) // 2
-			{
-			}
-			if (key == 51) // 3
 			{
 				// set selected tile as obstacle
 				spatial::PosF worldPos = m_camera.ScreenToWorld(m_lastMousePos);
@@ -109,26 +100,46 @@ namespace test
 				};
 				if (tileCoord.row >= 0 && tileCoord.row < m_tilemap.GetHeight() && tileCoord.col >= 0 && tileCoord.col < m_tilemap.GetWidth())
 				{
-					Tile tile = m_tilemap.GetTile(tileCoord.row, tileCoord.col);
-					tile.index = 1; // obstacle
-					m_tilemap.SetTile(tileCoord.row, tileCoord.col, tile);
+					component::tile::TileInstance tileInst;
+					tileInst.typeId = 1;
+					m_tilemap.SetTileInstance(tileCoord.row, tileCoord.col, tileInst);
 				}
 			}
-			if (key == 52) // 4
+			if (key == 50) // 2
+			{
+				// set selected tile as obstacle
+				spatial::PosF worldPos = m_camera.ScreenToWorld(m_lastMousePos);
+				component::tile::TileCoord tileCoord
+				{
+					static_cast<int>(worldPos.y / m_tileSize.height),
+					static_cast<int>(worldPos.x / m_tileSize.width)
+				};
+				if (tileCoord.row >= 0 && tileCoord.row < m_tilemap.GetHeight() && tileCoord.col >= 0 && tileCoord.col < m_tilemap.GetWidth())
+				{
+					component::tile::TileInstance tileInst;
+					tileInst.typeId = 0;
+					m_tilemap.SetTileInstance(tileCoord.row, tileCoord.col, tileInst);
+				}
+			}
+			if (key == 51) // 3
 			{
 				// remove all obstacles
 				for (int row = 0; row < m_tilemap.GetHeight(); row++)
 				{
 					for (int col = 0; col < m_tilemap.GetWidth(); col++)
 					{
-						Tile tile = m_tilemap.GetTile(row, col);
-						if (tile.index == 1)
+						if (!m_tileset.GetTile(m_tilemap.GetTileInstance(row, col).typeId).IsWalkable())
 						{
-							tile.index = 0;
-							m_tilemap.SetTile(row, col, tile);
+							component::tile::TileInstance tileInst;
+							tileInst.typeId = 0;
+							m_tilemap.SetTileInstance(row, col, tileInst);
 						}
 					}
 				}
+			}
+
+			if (key == 32) // space key
+			{
 			}
 			if (key == 53)
 			{
@@ -150,7 +161,9 @@ namespace test
 
 		void OnStart()
 		{
-			SetTileLayer(m_tilemap, 16, 16, Tile{ 0 });
+			m_tileset.Register(0, std::make_unique<component::tile::WalkableTile>());   // ID 0 ? Walkable
+			m_tileset.Register(1, std::make_unique<component::tile::ObstacleTile>());   // ID 1 ? Obstacle
+			SetTileLayer(m_tilemap, 16, 16, component::tile::TileInstance{ 0,0 });
 
 			m_camera.SetViewport(
 				{
@@ -195,8 +208,7 @@ namespace test
 			navigation::tile::FootprintResolver footprintResolver(
 				[this](int row, int col) -> bool
 				{
-					Tile tile = m_tilemap.GetTile(row, col);
-					return tile.index != 1; // walkable if index is not 1
+					return component::tile::IsWalkable(m_tilemap, m_tileset, row, col);
 				},
 				0.1f, footprint.size.width / 2.0f, footprint.size.height / 2.0f, true
 			);
@@ -257,7 +269,7 @@ namespace test
 			}
 		}
 
-		void RenderTileMap(component::tile::TileLayer<Tile>& tilemap)
+		void RenderTileMap(component::tile::TileLayer& tilemap)
 		{
 			float thickness = 1.0f;
 			spatial::SizeF inner{ m_tileSize.width - thickness * 2, m_tileSize.height - thickness * 2 };
@@ -267,10 +279,10 @@ namespace test
 			{
 				for (int col = 0; col < tilemap.GetWidth(); col++)
 				{
-					Tile tile = tilemap.GetTile(row, col);
+					component::tile::TileInstance tileInst = tilemap.GetTileInstance(row, col);
 
 					graphics::ColorF color;
-					switch (tile.index)
+					switch (tileInst.typeId)
 					{
 					case 0:
 						color = { 0.5f, 0.5f, 0.5f, 1 };
@@ -299,17 +311,15 @@ namespace test
 					m_engine.GetRenderer().Draw(m_camera.WorldToScreen(posInner), inner, color, 0);
 				}
 			}
-
 		}
-
-		void SetTileLayer(component::tile::TileLayer<Tile>& tileLayer, int width, int height, Tile tile)
+		void SetTileLayer(component::tile::TileLayer& tileLayer, int width, int height, component::tile::TileInstance tileInst)
 		{
 			tileLayer.SetSize({ width, height });
 			for (int row = 0; row < height; row++)
 			{
 				for (int col = 0; col < width; col++)
 				{
-					tileLayer.SetTile(row, col, tile);
+					tileLayer.SetTileInstance(row, col, tileInst);
 				}
 			}
 		}

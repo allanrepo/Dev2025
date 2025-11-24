@@ -20,7 +20,8 @@ private:
 		int index;
 	};
 	engine::Engine m_engine;
-	component::tile::TileLayer<Tile> m_tilemap;
+	component::tile::TileLayer m_tilemap;
+	component::tile::Tileset m_tileset;
 	spatial::Camera m_camera;
 	spatial::PosF m_lastMousePos;
 	bool m_isPanning = false;
@@ -30,7 +31,6 @@ private:
 public:
 	TestTile() :
 		m_engine("DirectX11", "Batch"),
-		//m_tilemap("tilemap.csv"),
 		m_camera({ 50, 50, 1024, 768 })
 	{
 		m_engine.OnStart += event::Handler(this, &TestTile::OnStart);
@@ -59,7 +59,7 @@ public:
 			0																		// rotation
 		);
 	}
-	void RenderTileMap(component::tile::TileLayer<Tile>& tilemap)
+	void RenderTileMap(component::tile::TileLayer& tilemap)
 	{
 		spatial::SizeF size{ 64.0f, 64.0f };
 
@@ -68,10 +68,10 @@ public:
 		{
 			for (int col = 0; col < tilemap.GetWidth(); col++)
 			{
-				Tile tile = tilemap.GetTile(row, col);
+				component::tile::TileInstance tile = tilemap.GetTileInstance(row, col);
 
 				graphics::ColorF color;
-				switch (tile.index)
+				switch (tile.typeId)
 				{
 				case 0:
 					color = { 0.5f, 0.5f, 0.5f, 1 };
@@ -245,21 +245,15 @@ public:
 		m_actors["hero"]->GetTransform().SetPosition(spatial::PosF{ 400, 300 });
 		m_actors["hero"]->SetState(std::make_unique<state::ActorIdleState>());
 
-		m_tilemap = engine::io::TileLayerLoader<Tile, int>::LoadFromCSV("tilemap.csv", ',',
-			[](int row, int col, const int& cell) -> Tile
-			{
-				// assumes T has a constructor like T{int}
-				return Tile
-				{
-					cell
-				};
-			});
+		m_tilemap = engine::io::TileLayerLoader<int>::LoadFromCSV("tilemap.csv", ',');
 
 		m_camera.SetWorldSize(
 			m_tilemap.GetWidth() * 64.0f,
 			m_tilemap.GetHeight() * 64.0f
 		);
 
+		m_tileset.Register(0, std::make_unique<component::tile::WalkableTile>());   // ID 0 ? Walkable
+		m_tileset.Register(1, std::make_unique<component::tile::ObstacleTile>());   // ID 1 ? Obstacle
 	}
 
 	void OnUpdate(float delta)

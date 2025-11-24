@@ -23,9 +23,9 @@ int main()
 	//TestInput testInput;
 	//TestActorStateBehavior testActorStateBehavior;
 	//TestSaveTextureToFile testSaveTextureToFile;
-	//testPathFinder::TestPathFinder testPathFinder;
+	testPathFinder::TestPathFinder testPathFinder;
 	//test::TestFootprintResolver testFootprintResolver;
-	test::TestBed1 testBed;
+	//test::TestBed testBed;
 	//TestTile testTile;
 	//TestSprite testSprite;
 	//TestRendererVisualComparison test;

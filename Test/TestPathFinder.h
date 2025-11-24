@@ -32,7 +32,8 @@ namespace testPathFinder
 			int index;
 		};
 		engine::Engine m_engine;
-		component::tile::TileLayer<Tile> m_tilemap;
+		component::tile::TileLayer m_tilemap;
+		component::tile::Tileset m_tileset;
 		spatial::Camera m_camera;
 		std::shared_ptr<graphics::resource::IFontAtlas> m_fontSmall;
 		std::shared_ptr<graphics::resource::IFontAtlas> m_fontLarge;
@@ -60,8 +61,7 @@ namespace testPathFinder
 				[this](int curRow, int currCol, int row, int col) -> bool
 				{
 					// quick check if the tile itself is walkable
-					Tile tile = m_tilemap.GetTile(row, col);
-					if (tile.index == 1) return false; // unwalkable
+					if (!component::tile::IsWalkable(m_tilemap, m_tileset, row, col)) return false;
 
 					// define corners of the footprint as positions. we want it as positions so we can iterate through it easier
 					std::vector<spatial::PosF> corners;
@@ -102,10 +102,7 @@ namespace testPathFinder
 						}
 
 						// check if this tile coordinate is unwalkable
-						Tile tile = m_tilemap.GetTile(tc.row, tc.col);
-
-						// if walkable return false
-						if (tile.index == 1) return false;
+						if (!component::tile::IsWalkable(m_tilemap, m_tileset, tc.row, tc.col)) return false;
 					}
 
 					// if we reach this point
@@ -206,23 +203,7 @@ namespace testPathFinder
 			{
 				m_step = 0;
 			}
-			if (key == 50) // 2
-			{
-				// set selected tile as walkable
-				spatial::PosF worldPos = m_camera.ScreenToWorld(m_lastMousePos);
-				component::tile::TileCoord tileCoord
-				{
-					static_cast<int>(worldPos.y / m_tileSize.height),
-					static_cast<int>(worldPos.x / m_tileSize.width)
-				};
-				if (tileCoord.row >= 0 && tileCoord.row < m_tilemap.GetHeight() && tileCoord.col >= 0 && tileCoord.col < m_tilemap.GetWidth())
-				{
-					Tile tile = m_tilemap.GetTile(tileCoord.row, tileCoord.col);
-					tile.index = 0; // walkable
-					m_tilemap.SetTile(tileCoord.row, tileCoord.col, tile);
-				}
-			}
-			if (key == 51) // 3
+			if (key == 50) // 1
 			{
 				// set selected tile as obstacle
 				spatial::PosF worldPos = m_camera.ScreenToWorld(m_lastMousePos);
@@ -233,23 +214,39 @@ namespace testPathFinder
 				};
 				if (tileCoord.row >= 0 && tileCoord.row < m_tilemap.GetHeight() && tileCoord.col >= 0 && tileCoord.col < m_tilemap.GetWidth())
 				{
-					Tile tile = m_tilemap.GetTile(tileCoord.row, tileCoord.col);
-					tile.index = 1; // obstacle
-					m_tilemap.SetTile(tileCoord.row, tileCoord.col, tile);
+					component::tile::TileInstance tileInst;
+					tileInst.typeId = 1;
+					m_tilemap.SetTileInstance(tileCoord.row, tileCoord.col, tileInst);
 				}
 			}
-			if (key == 52) // 4
+			if (key == 51) // 2
+			{
+				// set selected tile as obstacle
+				spatial::PosF worldPos = m_camera.ScreenToWorld(m_lastMousePos);
+				component::tile::TileCoord tileCoord
+				{
+					static_cast<int>(worldPos.y / m_tileSize.height),
+					static_cast<int>(worldPos.x / m_tileSize.width)
+				};
+				if (tileCoord.row >= 0 && tileCoord.row < m_tilemap.GetHeight() && tileCoord.col >= 0 && tileCoord.col < m_tilemap.GetWidth())
+				{
+					component::tile::TileInstance tileInst;
+					tileInst.typeId = 0;
+					m_tilemap.SetTileInstance(tileCoord.row, tileCoord.col, tileInst);
+				}
+			}
+			if (key == 52) // 3
 			{
 				// remove all obstacles
 				for (int row = 0; row < m_tilemap.GetHeight(); row++)
 				{
 					for (int col = 0; col < m_tilemap.GetWidth(); col++)
 					{
-						Tile tile = m_tilemap.GetTile(row, col);
-						if (tile.index == 1)
+						if (!m_tileset.GetTile(m_tilemap.GetTileInstance(row, col).typeId).IsWalkable())
 						{
-							tile.index = 0;
-							m_tilemap.SetTile(row, col, tile);
+							component::tile::TileInstance tileInst;
+							tileInst.typeId = 0;
+							m_tilemap.SetTileInstance(row, col, tileInst);
 						}
 					}
 				}
@@ -260,15 +257,10 @@ namespace testPathFinder
 
 		void OnStart()
 		{
-			m_tilemap = engine::io::TileLayerLoader<Tile, int>::LoadFromCSV("PathfindingTileMap.csv", ',',
-				[](int row, int col, const int& cell) -> Tile
-				{
-					// assumes T has a constructor like T{int}
-					return Tile
-					{
-						cell
-					};
-				});
+			m_tileset.Register(0, std::make_unique<component::tile::WalkableTile>());   // ID 0 ? Walkable
+			m_tileset.Register(1, std::make_unique<component::tile::ObstacleTile>());   // ID 1 ? Obstacle
+
+			m_tilemap = engine::io::TileLayerLoader<int>::LoadFromCSV("PathfindingTileMap.csv", ',');
 
 			m_camera.SetViewport(
 				{
@@ -343,7 +335,7 @@ namespace testPathFinder
 			}
 		}
 
-		void RenderTileMap(component::tile::TileLayer<Tile>& tilemap)
+		void RenderTileMap(component::tile::TileLayer& tilemap)
 		{
 			float thickness = 2.0f;
 			spatial::SizeF inner{ m_tileSize.width - thickness * 2, m_tileSize.height - thickness * 2 };
@@ -353,10 +345,11 @@ namespace testPathFinder
 			{
 				for (int col = 0; col < tilemap.GetWidth(); col++)
 				{
-					Tile tile = tilemap.GetTile(row, col);
+					component::tile::TileInstance tileInst = tilemap.GetTileInstance(row, col);
+
 
 					graphics::ColorF color;
-					switch (tile.index)
+					switch (tileInst.typeId)
 					{
 					case 0:
 						color = { 0.5f, 0.5f, 0.5f, 1 };
